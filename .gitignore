@@ -18,6 +18,7 @@ dist-ssr
 app\backend\node_modules
 app\backend\prisma
 # Editor directories and files
+app/frontend/*
 .vscode/*
 !.vscode/extensions.json
 .idea

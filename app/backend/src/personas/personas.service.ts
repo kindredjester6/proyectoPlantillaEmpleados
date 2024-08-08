@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Personas } from '@prisma/client';
-import { CreatePersonaDto } from './dto/create-persona.dto';
-import { UpdatePersonaDto } from './dto/update-persona.dto';
 
 @Injectable()
 export class PersonasService {
@@ -27,7 +25,7 @@ export class PersonasService {
 		@outResult = @outResult output`;
   }
 
-  async update(id: number, data: UpdatePersonaDto): Promise<Personas> {
+  async update(id: number, data: {}): Promise<Personas> {
     return this.prisma.$queryRaw``;
   }
 

@@ -7,16 +7,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Productos {
-  id     Int     @id(map: "PK__Producto__3213E83F2C9B8A60") @default(autoincrement())
-  codigo String  @unique(map: "idx_unique") @db.VarChar(256)
-  nombre String? @db.VarChar(32)
-  precio Float?  @db.Money
-}
-
-model Personas {
-  id     Int     @id(map: "PK_Personas") @default(autoincrement())
-  nombre String? @db.VarChar(50)
-  edad   Int?
-  email  String? @db.VarChar(50)
+model Empleado {
+  Id      Int    @id(map: "PK_Empleado") @default(autoincrement())
+  Nombre  String @db.VarChar(64)
+  Salario Float  @db.Money
 }
