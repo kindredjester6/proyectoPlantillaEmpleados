@@ -1,6 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
+/**
+ * @function bootstrap Este procedimiento levanta la aplicación.
+ * Primeramente lo que hace es crear los modulos anidados, y sucesivamente 
+ * levantar la aplicacion en el puerto asignado.
+ */
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   await app.listen(9876);
