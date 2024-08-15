@@ -2,7 +2,6 @@
   "name": "connect-bd",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -12,12 +11,12 @@
     "app/*"
   ],
   "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4",
     "vite": "^5.3.4"
   },
   "dependencies": {
     "@prisma/client": "^5.17.0",
-    "msnodesqlv8": "^4.2.1",
-    "mssql": "^11.0.1",
     "turbo": "^2.0.11"
   }
 }

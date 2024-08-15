@@ -7,20 +7,21 @@
     <title>Sistema de Empleados</title>
 </head>
 <body style="background-color: #dcccff;">
-  <div align='center'>
+  <div align ='center'>
 
     <h1 class="titulo" style="font-size: 40px;" >Insertar Empleado</h1>
-    <form name="form">
+    <form name="form" method="post">
       <label for="Nombre">Nombre: </label>
-      <input name="Nombre">
-      <br><br>
+      <input name="Nombre" placeholder="Jimin">
+      <br/><br/>
       <label for="Salario">Salario:</label>
-      <input name="Salario">
-      <br><br>
-      <button onclick="validarVacio()"> Insertar</button>
-      <a href="inicial.html">
-        <button>Regresar</button>
-      </a>    </form>
+      <input name="Salario" placeholder="1000">
+      <br/><br/>
+      <button id="btnInsertar" onclick="validarVacio()" type="submit"> Insertar </button>
+      <a href="inicial.html"> 
+        <button type="button" >Regresar</button>
+      </a>
+    </form>
 
     <script src = "script.js" ></script>
   </div>

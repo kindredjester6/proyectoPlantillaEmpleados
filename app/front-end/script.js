@@ -1,11 +1,5 @@
 data = {id: 1, empleado: "jimin", salario: 4000};
 
-
-function regresarInicio(){
-    location.href = "inicial.html";
-
-}
-
 // funcion que valida que el campo del nombre y del salario no esten vacios
 function validarVacio(){
     var nombre = document.forms["form"]["Nombre"].value;
