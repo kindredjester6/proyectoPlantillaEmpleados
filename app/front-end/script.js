@@ -26,4 +26,45 @@ function revisarInput(nombre, salario){
     };
 }
 
+function mostrarEmpleados(data){
+    for(let empleado = 0; empleado < data.length; empleado++){
+        var tr = document.createElement("tr");
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        var td3 = document.createElement("td");
+
+        tds = [td1, td2, td3];
+        td1.textContent = data[empleado].id;
+        td2.textContent = data[empleado].empleado;
+        td3.textContent = data[empleado].salario;
+
+        for (let i = 0; i < tds.length; i++) {
+            tds[i].classList.add("tableData");
+            tr.appendChild(tds[i]);
+        }
+        
+        var tablero = document.getElementById("tablero");
+        tablero.appendChild(tr);
+    
+    }
+}
+
+
+
+function fetchJSONData() {
+    fetch("./empleados.json")
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error
+                    (`HTTP error! Status: ${res.status}`);
+            }
+            return res.json();
+        })
+        .then((data) => 
+            mostrarEmpleados(data))
+
+
+        .catch((error) => 
+               console.error("Unable to fetch data:", error));
+}
 
