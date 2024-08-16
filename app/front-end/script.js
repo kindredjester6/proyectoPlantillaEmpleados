@@ -1,5 +1,3 @@
-data = {id: 1, empleado: "jimin", salario: 4000};
-
 // funcion que valida que el campo del nombre y del salario no esten vacios
 function validarVacio(){
     var nombre = document.forms["form"]["Nombre"].value;
@@ -12,6 +10,26 @@ function validarVacio(){
     } else{
         revisarInput(nombre, salario);
     };
+}
+
+
+
+// funcion que ordena alfabeticamente los nombres de la tabla
+function ordenar(){
+    var tablero = document.getElementById("tablero");
+    let filas = Array.from(tablero.rows);
+    filas.sort(comparar);
+    tablero.append(...filas);
+}
+
+function comparar(fila1, fila2){
+    // numero de la columna donde se encuentra los nombres
+    var numColum = 1;
+    if (fila1.cells[numColum].innerHTML > fila2.cells[numColum].innerHTML){
+        return 1;
+    } else{
+        return -1;
+    }
 }
 
 
@@ -45,6 +63,7 @@ function mostrarEmpleados(data){
         
         var tablero = document.getElementById("tablero");
         tablero.appendChild(tr);
+        ordenar();
     
     }
 }

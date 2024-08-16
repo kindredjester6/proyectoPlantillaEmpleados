@@ -3,7 +3,8 @@
     {"id": 3, "empleado": "dan", "salario": 800},
     {"id": 4, "empleado": "sol", "salario": 9000},
     {"id": 2, "empleado": "yoongi", "salario": 7500},
-    {"id": 4, "empleado": "sol", "salario": 9000}
+    {"id": 5, "empleado": "day", "salario": 1200},
+    {"id": 6, "empleado": "alisson", "salario": 1400}
 
 
 ]
