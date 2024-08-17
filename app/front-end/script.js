@@ -12,27 +12,6 @@ function validarVacio(){
     };
 }
 
-
-
-// funcion que ordena alfabeticamente los nombres de la tabla
-function ordenar(){
-    var tablero = document.getElementById("tablero");
-    let filas = Array.from(tablero.rows);
-    filas.sort(comparar);
-    tablero.append(...filas);
-}
-
-function comparar(fila1, fila2){
-    // numero de la columna donde se encuentra los nombres
-    var numColum = 1;
-    if (fila1.cells[numColum].innerHTML > fila2.cells[numColum].innerHTML){
-        return 1;
-    } else{
-        return -1;
-    }
-}
-
-
 function revisarInput(nombre, salario){
     // expresion regular
     let regexNom = /^[a-zA-Z-]+$/;
@@ -47,24 +26,13 @@ function revisarInput(nombre, salario){
 function mostrarEmpleados(data){
     for(let empleado = 0; empleado < data.length; empleado++){
         var tr = document.createElement("tr");
-        var td1 = document.createElement("td");
-        var td2 = document.createElement("td");
-        var td3 = document.createElement("td");
-
-        tds = [td1, td2, td3];
-        td1.textContent = data[empleado].id;
-        td2.textContent = data[empleado].empleado;
-        td3.textContent = data[empleado].salario;
-
-        for (let i = 0; i < tds.length; i++) {
-            tds[i].classList.add("tableData");
-            tr.appendChild(tds[i]);
+        for (let i = 0; i < Object.values(data[empleado]).length; i++) {
+            let createTd = document.createElement("td")
+            createTd.textContent = Object.values(data[empleado]).at(i)
+            tr.appendChild(createTd)
         }
-        
         var tablero = document.getElementById("tablero");
         tablero.appendChild(tr);
-        ordenar();
-    
     }
 }
 
@@ -86,4 +54,3 @@ function fetchJSONData() {
         .catch((error) => 
                console.error("Unable to fetch data:", error));
 }
-
