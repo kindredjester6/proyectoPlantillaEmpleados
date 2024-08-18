@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { EmpleadoService } from './empleado.service';
 import { EmpleadoController } from './empleado.controller';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { BdService } from 'src/DataBase/database.service';
 
 /**
  * @method Module Es un metodo que importa el controlador y la 
@@ -11,6 +11,6 @@ import { PrismaService } from 'src/prisma/prisma.service';
  */
 @Module({
   controllers: [EmpleadoController],
-  providers: [EmpleadoService, PrismaService],
+  providers: [EmpleadoService, BdService],
 })
 export class EmpleadoModule {}

@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { Empleado } from '@prisma/client';
+import { Injectable, ResponseDecoratorOptions } from '@nestjs/common';
+import { BdService } from 'src/DataBase/database.service';
+import { Employee } from 'util/interfaces/emploInter';
+import { ResponseMsj } from 'util/interfaces/bdResponse';
 
 /**
  * @exports EmpleadoService @class Es una clase que conlleva la logica de
@@ -9,24 +10,16 @@ import { Empleado } from '@prisma/client';
  */
 @Injectable()
 export class EmpleadoService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private dataBase: BdService) {}
 
-  async findAll(): Promise<Empleado[]> {
-    return this.prisma.$queryRaw`
-    DECLARE @outResult int
-    exec [dbo].[listEmployees]
-      @outResult = @outResult output
-    `;
+  async findAll(): Promise<ResponseMsj> {
+    return this.dataBase.listarEmpleados();
   }
 
-  async create(data: {nombre: String, salario: number}): Promise<Empleado> {
+  //Crear Tipos
+  async create(data: Employee): Promise<Object> {
     console.log(data)
-    return this.prisma.$queryRaw`
-    DECLARE	@outResult int
-    exec [dbo].[createEmployee]
-		  @Nombre = ${data.nombre},
-		  @Salario = ${data.salario},
-		  @outResult = @outResult output`;
+    return this.dataBase.crearEmpleados(data);
   }
 
 }
