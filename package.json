@@ -16,7 +16,7 @@
     "vite": "^5.3.4"
   },
   "dependencies": {
-    "@prisma/client": "^5.17.0",
+    "@nestjs/config": "^3.2.3",
     "turbo": "^2.0.11"
   }
 }
