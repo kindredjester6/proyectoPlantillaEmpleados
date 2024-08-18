@@ -1,103 +1,56 @@
-const sql = require('mssql')
+import {connect, Int, Money, VarChar} from 'mssql'
+//const sql = require('mssql')
 
-// const config = {
-//     user: process.env.DATABASE_USER,
-//     password: process.env.DATABASE_PASS,
-//     server: process.env.DATABASE_SERVER || "LocalHost", // You can use 'localhost\\instance' to connect to named instance
-//     database: process.env.DATABASE_DB,
-//     options: {
-//         encrypt: false, // for azure
-//         trustServerCertificate: true // change to true for local dev / self-signed certs
-//     }
-// }
-
-// console.log(config);
-
-// (async function () {
-//     let pool =await sql.connect(config)
-//     let result = await pool.request().query`
-//     DECLARE @outResult int
-//     exec [dbo].[listEmployees]
-//       @outResult = @outResult output
-//     `
-//     console.log(result)
-// })()
-
-
-class DataBaseClient {
+export class DataBaseClient {
     private pool:any
     private config = {}
-    public user:String
-    private password:String
-    private server:String
-    public database:String
-    private options:object
     
     /**
-     *
+     * @constructor Este puede recibir 1 o 5 parametros, 
+     * de los cuales serán escenciales a la hora de iniciar sesión
+     * en la base de datos.
      */
-    constructor(user, password, server, database, options)
     constructor(config);
-    constructor(miArray: any[]) {
-        if(miArray.length == 5){
-            this.user = miArray[0];
-            this.password = miArray[1];
-            this.server = miArray[2];
-            this.database = miArray[3];
-            this.options = miArray[4];
-        }else{
-            this.config={
-                user: miArray[0],
-                password: miArray[1],
-                server: miArray[2],
-                database: miArray[3],
-                options: miArray[4]
+    constructor(user, password, server, database, options);
+    constructor(...args: any[]) {
+        if(args.length == 5){
+            this.config = {
+                user:args[0]
+                ,password:args[1]
+                ,server:args[2]
+                ,database:args[3]
+                ,options:args[4]
             }
+        }else{
+            this.config = args[0]
         }
     }
+
     /**
-     * connect
+     * Conexión con la base de datos
+     * @description Se conecta por medio del atributo config o 
+     * por los atributos de 
      */
     public async connect() {
-        if (Object.keys(this.config).length === 0){ 
-            this.config = {
-                user: this.user,
-                password: this.password,
-                server: this.server || "LocalHost", // You can use 'localhost\\instance' to connect to named instance
-                database: this.database,
-                options: this.options
-            }
-        }
-
-        this.pool = await sql.connect(config)
+        this.pool = await connect(this.config)
     }
     
     /**
      * listarEmpleados
      */
     public async listarEmpleados() {
-        let result = await this.pool.request().query`
-            DECLARE @outResult int
-            exec [dbo].[listEmployees]
-            @outResult = @outResult output
-        `
-        console.log(result)
+        let result = await this.pool.request()
+            .output('outResult', Int)
+            .execute('listEmployees');
+        return result;
+    }
+
+    public async crearEmpleados(nombre:String, salario:number){
+        let result = await this.pool.request()
+            .input('Nombre', VarChar(64), nombre)
+            .input('Salario', Money, salario)
+            .output('outResult', Int)
+            .execute('createEmployee')
+        return {output:result.output.outResult, returnValue:result.returnValue};
     }
 }
-
-const config = {
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASS,
-    server: process.env.DATABASE_SERVER || "LocalHost", // You can use 'localhost\\instance' to connect to named instance
-    database: process.env.DATABASE_DB,
-    options: {
-        encrypt: false, // for azure
-        trustServerCertificate: true // change to true for local dev / self-signed certs
-    }
-}
-let miBD = new DataBaseClient(config);
-
-(async function name() {
-    await miBD.connect();
-    await miBD.listarEmpleados();
-})()
