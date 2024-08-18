@@ -36,8 +36,6 @@ function mostrarEmpleados(data){
     }
 }
 
-
-
 function fetchJSONData() {
     fetch("./empleados.json")
         .then((res) => {
@@ -49,8 +47,6 @@ function fetchJSONData() {
         })
         .then((data) => 
             mostrarEmpleados(data))
-
-
         .catch((error) => 
                console.error("Unable to fetch data:", error));
 }
