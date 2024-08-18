@@ -51,7 +51,7 @@ export class DataBaseClient {
      * @var result Variable que contiene los objetos
      */
     public async listarEmpleados() {
-        let result:Object[]
+        let result:ResponseMsj
         result = await this.pool.request()
             .output('outResult', Int)
             .execute('listEmployees');
