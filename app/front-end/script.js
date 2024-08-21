@@ -39,7 +39,7 @@ function mostrarEmpleados(data){
 }
 
 function fetchGetJSONData() {
-    fetch("./empleados.json")
+    fetch("http://localhost:9876/")
         .then((res) => {
             if (!res.ok) {
                 throw new Error
@@ -47,26 +47,28 @@ function fetchGetJSONData() {
             }
             return res.json();
         })
-        .then((data) => 
-            mostrarEmpleados(data))
+        .then((data) => { 
+            mostrarEmpleados(data.recordset)})
         .catch((error) => 
                console.error("Unable to fetch data:", error));
 }
 
 function fetchPostJSONData() {
     const formData = new FormData(document.getElementById("form"));
+    console.log("desde fetchpost")
     const data = Object.fromEntries(formData);
     console.log(data);
     // creo que se debe de poner el servidor
-    fetch("", {
+    fetch("http://localhost:9876/", {
         method: "POST",
         headers: {
-            'Content-Type': 'aplication/json'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
 
-    }).then(res => console.log(res.json()))
-    .then(data => console.log(data));
+    }).then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
    
 }
 

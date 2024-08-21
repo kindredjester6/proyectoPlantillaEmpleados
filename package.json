@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "@nestjs/config": "^3.2.3",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
     "turbo": "^2.0.11"
   }
 }
