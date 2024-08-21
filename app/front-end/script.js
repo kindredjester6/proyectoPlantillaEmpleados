@@ -5,10 +5,16 @@ function validarVacio(){
 
     if (nombre == ""){
         alert("Por favor ingrese el nombre del empleado");
+        return false;
 
     } if(salario == ""){
         alert("Por favor ingrese el salario del empleado");
-    }revisarInput(nombre, salario);
+        return false;
+
+    } if(revisarInput(nombre, salario)){
+        return true;
+
+    };
 
 }
 
@@ -19,9 +25,13 @@ function revisarInput(nombre, salario){
 
     if(!regexNom.test(nombre)){
         alert("El nombre solo puede tener letras del alfabeto o guion");
+        return false;
+
     } if(!regexNum.test(salario)){
         alert("El salario solo puede tener valores numericos");
-    }
+        return false;
+
+    } return true;
 }
 
 function mostrarEmpleados(data){
@@ -74,8 +84,9 @@ function fetchPostJSONData() {
 
 form.addEventListener('submit', function(event) {
     event.preventDefault(); // Evita el envío del formulario
-    validarVacio();
-    fetchPostJSONData();
+    if(validarVacio()){
+        fetchPostJSONData();
+    }
 
 });
 
