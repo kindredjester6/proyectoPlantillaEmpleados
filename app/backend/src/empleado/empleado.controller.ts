@@ -1,5 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from '@nestjs/common';
 import { EmpleadoService } from './empleado.service';
+import { Employee } from 'util/interfaces/emploInter';
 
 /**
  * @exports EmpleadoController @class Es una clase controlador que genera las rutas para realizar
@@ -17,7 +18,7 @@ export class EmpleadoController {
    * @returns 
    */
   @Post()
-  create(@Body() data: {nombre: String, salario: number}) { 
+  create(@Body() data: Employee) { 
     return this.empleadoService.create(data);
   }
 

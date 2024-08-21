@@ -1,4 +1,4 @@
 export interface Employee{
-    nombre: String
-    salario: number        
+    Nombre: String
+    Salario: number        
 }

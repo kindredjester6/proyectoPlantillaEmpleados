@@ -66,9 +66,10 @@ export class DataBaseClient {
      */
     public async crearEmpleados(request: Employee){
         let result:ResponseMsj
+        console.log(request)
         result = await this.pool.request()
-            .input('Nombre', VarChar(64), request.nombre)
-            .input('Salario', Money, request.salario)
+            .input('Nombre', VarChar(64), request.Nombre)
+            .input('Salario', Money, request.Salario)
             .output('outResult', Int)
             .execute('createEmployee')
         return {output:result.output.outResult, returnValue:result.returnValue};
