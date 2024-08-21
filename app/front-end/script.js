@@ -2,7 +2,6 @@
 function validarVacio(){
     var nombre = document.forms["form"]["Nombre"].value;
     var salario = document.forms["form"]["Salario"].value;
-
     if (nombre == ""){
         alert("Por favor ingrese el nombre del empleado");
         return false;
@@ -68,7 +67,6 @@ function fetchPostJSONData() {
     console.log("desde fetchpost")
     const data = Object.fromEntries(formData);
     console.log(data);
-    // creo que se debe de poner el servidor
     fetch("http://localhost:9876/", {
         method: "POST",
         headers: {
