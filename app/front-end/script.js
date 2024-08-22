@@ -3,22 +3,23 @@ function validarVacio(){
     var nombre = document.forms["form"]["Nombre"].value;
     var salario = document.forms["form"]["Salario"].value;
     let isGood = true;
+    let empty = "" //Para evitar "magic strings"
 
-    if (nombre === "" && salario === ""){
+    if (nombre === empty && salario === empty){
         alert("Por favor ingrese el nombre y el salario del empleado");
         isGood = false;
     }
-    else if (nombre === ""){
+    else if (nombre === empty){
         alert("Por favor ingrese el nombre del empleado");
         isGood = false;
 
-    }else if(salario === ""){
+    }else if(salario === empty){
         alert("Por favor ingrese el salario del empleado");
         isGood = false;
     }
     
     if (isGood === false){
-        return isGood; //Not good
+        return isGood;
     }else{
         return revisarInput(nombre, salario);
     }
@@ -102,7 +103,7 @@ function fetchPostJSONData() {
 
 form.addEventListener('submit', function(event) {
     event.preventDefault(); // Evita el envío del formulario
-    if(validarVacio() === true){
+    if(validarVacio()){
         fetchPostJSONData();
     }
 });
