@@ -2,26 +2,48 @@
 function validarVacio(){
     var nombre = document.forms["form"]["Nombre"].value;
     var salario = document.forms["form"]["Salario"].value;
+    let isGood = true;
 
-    if (nombre == ""){
+    if (nombre === "" && salario === ""){
+        alert("Por favor ingrese el nombre y el salario del empleado");
+        isGood = false;
+    }
+    else if (nombre === ""){
         alert("Por favor ingrese el nombre del empleado");
+        isGood = false;
 
-    } if(salario == ""){
+    }else if(salario === ""){
         alert("Por favor ingrese el salario del empleado");
-    }revisarInput(nombre, salario);
-
+        isGood = false;
+    }
+    
+    if (isGood === false){
+        return isGood; //Not good
+    }else{
+        return revisarInput(nombre, salario);
+    }
 }
 
 function revisarInput(nombre, salario){
     // expresion regular
-    let regexNom = /^[a-zA-Z-]+$/;
+    let regexNom = /^[a-zA-Z- ]+$/;
     let regexNum = /^[0-9]+$/;
+    let isGood = true;
 
-    if(!regexNom.test(nombre)){
-        alert("El nombre solo puede tener letras del alfabeto o guion");
-    } if(!regexNum.test(salario)){
-        alert("El salario solo puede tener valores numericos");
+    if (!regexNom.test(nombre) && !regexNum.test(salario)){
+        alert(`El nombre solo puede tener letras del alfabeto o guion\n
+            Y el salario solo valores numericos`);
+        isGood = false;
     }
+    else if(!regexNom.test(nombre)){
+        alert("El nombre solo puede tener letras del alfabeto o guion");
+        isGood = false;
+    }else if(!regexNum.test(salario)){
+        alert("El salario solo puede tener valores numericos");
+        isGood = false;
+    }
+
+    return isGood;
 }
 
 function mostrarEmpleados(data){
@@ -56,27 +78,33 @@ function fetchGetJSONData() {
 function fetchPostJSONData() {
     const formData = new FormData(document.getElementById("form"));
     console.log("desde fetchpost")
-    const data = Object.fromEntries(formData);
-    console.log(data);
+    const dataUser = Object.fromEntries(formData);
+    console.log(dataUser);
     // creo que se debe de poner el servidor
     fetch("http://localhost:9876/", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(dataUser)
 
     }).then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => {console.log(data)
+        if (data.output === 0){
+            location.href = 'inicial.html'
+        } else{
+            alert(`El usuario ${dataUser.Nombre} ya existe`)
+        }
+    })
     .catch(error => console.error('Error:', error));
    
 }
 
 form.addEventListener('submit', function(event) {
     event.preventDefault(); // Evita el envío del formulario
-    validarVacio();
-    fetchPostJSONData();
-
+    if(validarVacio() === true){
+        fetchPostJSONData();
+    }
 });
 
 
