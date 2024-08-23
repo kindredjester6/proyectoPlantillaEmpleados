@@ -9,7 +9,8 @@ function validarVacio(){
     var nombre = document.forms["form"]["Nombre"].value;
     var salario = document.forms["form"]["Salario"].value;
     let isGood = true;
-    let empty = "" //Para evitar "magic strings"
+    // Para evitar "magic strings"
+    let empty = ""          
     if (nombre === empty && salario === empty){
         alert("Por favor ingrese el nombre y el salario del empleado");
         isGood = false;
@@ -38,7 +39,7 @@ function validarVacio(){
  */
 
 function revisarInput(nombre, salario){
-    // expresion regular
+    // Expresion regular
     let regexNom = /^[a-zA-Z- ]+$/;
     let regexNum = /^[0-9]+$/;
     let isGood = true;
@@ -47,8 +48,7 @@ function revisarInput(nombre, salario){
         alert(`El nombre solo puede tener letras del alfabeto o guion\n
             Y el salario solo valores numericos`);
         isGood = false;
-    }
-    else if(!regexNom.test(nombre)){
+    }else if(!regexNom.test(nombre)){
         alert("El nombre solo puede tener letras del alfabeto o guion");
         isGood = false;
     }else if(!regexNum.test(salario)){
@@ -82,6 +82,7 @@ function mostrarEmpleados(data){
  * Funcion que obtiene los datos de la bd para
  * mostrar la lista de empleados en la interfaz inicial
  */
+
 function fetchGetJSONData() {
     fetch("http://localhost:9876/")
         .then((res) => {
@@ -101,6 +102,7 @@ function fetchGetJSONData() {
  * Funcion que realiza la insercion de los datos
  * ingresados en la bd
  */
+
 function fetchPostJSONData() {
     const formData = new FormData(document.getElementById("form"));
     console.log("desde fetchpost")
@@ -123,7 +125,6 @@ function fetchPostJSONData() {
         }
     })
     .catch(error => console.error('Error:', error));
-   
 }
 
 form.addEventListener('submit', function(event) {
