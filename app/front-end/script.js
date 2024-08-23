@@ -92,6 +92,7 @@ function fetchPostJSONData() {
     }).then(response => response.json())
     .then(data => {console.log(data)
         if (data.output === 0){
+            alert(`Insercion exitosa: El usuario ${dataUser.Nombre} se ingreso correctamente`)
             location.href = 'inicial.html'
         } else{
             alert(`El usuario ${dataUser.Nombre} ya existe`)
@@ -107,8 +108,4 @@ form.addEventListener('submit', function(event) {
         fetchPostJSONData();
     }
 });
-
-
-// alert("El empleado ya existe");
-// alert("Se ingreso el empleado correctamente");
 
