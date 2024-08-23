@@ -1,10 +1,15 @@
-// funcion que valida que el campo del nombre y del salario no esten vacios
+
+/**
+ * Funcion que valida que los inputs del nombre
+ * y del salario no esten vacios
+ * @returns boolean
+ */
+
 function validarVacio(){
     var nombre = document.forms["form"]["Nombre"].value;
     var salario = document.forms["form"]["Salario"].value;
     let isGood = true;
     let empty = "" //Para evitar "magic strings"
-
     if (nombre === empty && salario === empty){
         alert("Por favor ingrese el nombre y el salario del empleado");
         isGood = false;
@@ -12,18 +17,25 @@ function validarVacio(){
     else if (nombre === empty){
         alert("Por favor ingrese el nombre del empleado");
         isGood = false;
-
     }else if(salario === empty){
         alert("Por favor ingrese el salario del empleado");
         isGood = false;
     }
-    
     if (isGood === false){
         return isGood;
     }else{
         return revisarInput(nombre, salario);
     }
 }
+
+/**
+ * Funcion que revisa por medio de expresiones regulares
+ * que el nombre y el salario cumplan con los requerimientos 
+ * del programa
+ * @param {String} nombre 
+ * @param {String} salario 
+ * @returns boolean
+ */
 
 function revisarInput(nombre, salario){
     // expresion regular
@@ -43,9 +55,14 @@ function revisarInput(nombre, salario){
         alert("El salario solo puede tener valores numericos");
         isGood = false;
     }
-
     return isGood;
 }
+
+/**
+ * Funcion que crea los datos de la tabla para agregar a los 
+ * empleados en la tabla de la interfaz principal
+ * @param {data} data 
+ */
 
 function mostrarEmpleados(data){
     for(let empleado = 0; empleado < data.length; empleado++){
@@ -61,6 +78,10 @@ function mostrarEmpleados(data){
     }
 }
 
+/**
+ * Funcion que obtiene los datos de la bd para
+ * mostrar la lista de empleados en la interfaz inicial
+ */
 function fetchGetJSONData() {
     fetch("http://localhost:9876/")
         .then((res) => {
@@ -76,12 +97,15 @@ function fetchGetJSONData() {
                console.error("Unable to fetch data:", error));
 }
 
+/**}
+ * Funcion que realiza la insercion de los datos
+ * ingresados en la bd
+ */
 function fetchPostJSONData() {
     const formData = new FormData(document.getElementById("form"));
     console.log("desde fetchpost")
     const dataUser = Object.fromEntries(formData);
     console.log(dataUser);
-    // creo que se debe de poner el servidor
     fetch("http://localhost:9876/", {
         method: "POST",
         headers: {
