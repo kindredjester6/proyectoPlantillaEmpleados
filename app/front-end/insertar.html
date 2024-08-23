@@ -8,17 +8,19 @@
 </head>
 <body style="background-color: #dcccff;">
   <div align ='center'>
-    <h1 class="titulo" style="font-size: 40px;" >Insertar Empleado</h1>
-    <form name="form" method="post" id="form">
-      <label for="Nombre">Nombre: </label>
-      <input name="Nombre" placeholder="Nombre">
-      <br/><br/>
-      <label for="Salario">Salario:</label>
-      <input name="Salario" placeholder="0">
-      <br/><br/>
+    <h1 class="titulo" style="font-size: 6vh;" >Insertar Empleado</h1>
+    <form id="form" name="form" method="post">
+      <fieldset>
+        <legend> Datos del Empleado </legend>
+          <label for="Nombre"> Nombre </label>
+          <input name="Nombre" placeholder="Nombre">
+          
+        <label for="Salario">Salario</label>
+        <input name="Salario" placeholder="0">
+      </fieldset>
       <button id="btnInsertar" type="submit"> Insertar </button>
       <a href="inicial.html"> 
-        <button type="button" >Regresar</button>
+        <button type="button" class="" >Regresar</button>
       </a>
     </form>
     <script src = "script.js" ></script>
