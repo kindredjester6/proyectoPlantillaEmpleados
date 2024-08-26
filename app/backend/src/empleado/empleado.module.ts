@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { EmpleadoService } from './empleado.service';
 import { EmpleadoController } from './empleado.controller';
-import { BdService } from 'src/DataBase/database.service';
+import { BdService } from 'src/database/database.service';
 
 /**
  * @method Module Es un metodo que importa el controlador y la 

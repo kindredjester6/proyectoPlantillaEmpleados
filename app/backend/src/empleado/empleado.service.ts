@@ -1,5 +1,5 @@
-import { Injectable, ResponseDecoratorOptions } from '@nestjs/common';
-import { BdService } from 'src/DataBase/database.service';
+import { Injectable } from '@nestjs/common';
+import { BdService } from 'src/database/database.service';
 import { Employee } from 'util/interfaces/emploInter';
 import { ResponseMsj } from 'util/interfaces/bdResponse';
 
